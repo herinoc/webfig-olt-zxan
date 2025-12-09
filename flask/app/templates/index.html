@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Management System</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!------------------------------ SIDEBAR -------------------------------->
+  <aside class="sidebar">
+    <h2>Easy Config ⚙️</h2>    
+    <nav>
+      <ul>
+        <li><a href="#" class="active" data-menu="dashboard">Dashboard</a></li>
+        <li class="has-submenu">
+          <!-- Trik: checkbox + label -->
+          <input type="checkbox" id="toggle-master" hidden>
+          <label for="toggle-master" class="menu-label">Data Master</label>
+          <ul class="submenu">
+            <li><a href="#" data-menu="oltDataMaster" class="menu-link">Add OLT</a></li>
+            <li><a href="#" data-menu="oltDataUpdate" class="menu-link">Change OLT</a></li>
+            <!-- <li><a href="#" data-menu="oltDataGpon" class="menu-link">Import Profile</a></li> -->
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <input type="checkbox" id="toggle-tools" hidden>
+          <label for="toggle-tools" class="menu-label">Tools</label>
+
+          <ul class="submenu">
+            <li><a href="#" data-menu="oltDataGpon" class="menu-link">Import Profile</a></li>
+            <li><a href="#" data-menu="oltConfigPSB" class="menu-link">Config PPPOE</a></li>
+	    <li><a href="#" data-menu="oltConfigBridge" class="menu-link">Config Bridge</a></li>
+          </ul>
+        </li>
+        <!-- <li><a href="#">Tools</a></li> -->
+        <li><a href="#" data-menu="report" class="menu-link">Report</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!------------------------------ MAIN DASBOARD -------------------------------->
+  <main class="main-content" id="main-content">
+    <h1>Dashboard</h1>
+    <div class="card">
+      <p>Welcome to the Network Management System Dashboard!</p>
+    </div>
+  </main>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

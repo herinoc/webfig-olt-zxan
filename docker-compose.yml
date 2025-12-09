@@ -1,0 +1,65 @@
+version: "3.9"
+
+#services:
+#  db:
+#    image: mysql:5.7          # kalau tidak perlu custom, pakai image langsung
+#    container_name: nms-olt-db
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: tux
+#      MYSQL_DATABASE: nms_db
+#    ports:
+#      - "7645:3306"
+#    volumes:
+#     - ./db/backup.sql:/docker-entrypoint-initdb.d/backup.sql:ro
+
+#  flask:
+#    build: ./flask
+#    container_name: nms-olt-flask
+#    restart: always
+#    depends_on:
+#      - db
+#    ports:
+#      - "9693:5000"
+#    environment:
+#      DB_HOST: db
+#      DB_USER: root
+#      DB_PASSWORD: tux
+#      DB_NAME: nms_db
+#      DB_CONFIG: db:3306
+
+version: "3.9"
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: nms-olt-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tux
+      MYSQL_DATABASE: nms_db
+    ports:
+      - "7645:3306"
+    volumes:
+      - ./db/backup.sql:/docker-entrypoint-initdb.d/backup.sql:ro
+
+  flask:
+    build: ./flask
+    container_name: nms-olt-flask
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "9693:5000"
+    environment:
+      FLASK_ENV: development       # supaya auto reload
+      FLASK_APP: app               # nama package Flask kamu
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: tux
+      DB_NAME: nms_db
+      DB_PORT: 3306                # port di container db
+    volumes:
+      - ./flask/app:/app/app       # mount source code app
+      - ./flask/templates:/app/templates
+
